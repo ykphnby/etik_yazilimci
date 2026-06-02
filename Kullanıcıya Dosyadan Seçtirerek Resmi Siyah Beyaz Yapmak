@@ -1,0 +1,25 @@
+from PIL import Image
+import tkinter as tk
+from tkinter import filedialog
+import os
+
+# Dosya seçme penceresi açmak
+root =tk.Tk()
+root.withdraw() # Ana pencereyi gizle
+
+dosya_yolu = filedialog.askopenfilename( title="Siyah Beyaz Yapılacak Resmi Seç", filetypes=[("Resim Dsoyaları", "*.jpg *.jpeg *.png *.bmp")])
+# burda açılan pencerenin başlığı ve hangi tür resim uzantılarını seçebileceğini veriyoruz.
+
+if dosya_yolu:
+    img = Image.open(dosya_yolu) # resmi aç
+    siyah_beyaz = img.convert("L") # siyah beyaz yap
+
+    # kaydetmek için yeni dosya oluştur
+    klasor,dosya= os.path.split(dosya_yolu)
+    isim,uzanti= os.path.splitext(dosya)
+    yeni_yol= os.path.join(klasor ,f"{isim}_sb{uzanti}")
+
+    siyah_beyaz.save(yeni_yol)
+    print(f"Bitti! Kaydedildi: {yeni_yol}")
+else:
+    print("Dosya Seçilmedi")
