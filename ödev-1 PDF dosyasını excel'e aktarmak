@@ -1,0 +1,8 @@
+import tabula
+import pandas as pd
+
+df_list = tabula.read_pdf("ornek.pdf",pages="all") # bu satırda PDF'yi okumasını ve varsa DataFrame yapmasını söylüyoruz
+
+df_list[0].to_excel("cikti.xlsx",index=False) # ilk tabloyu excele yazdırıyoruz.
+
+print("PDF Excel'e Çevrildi...")
